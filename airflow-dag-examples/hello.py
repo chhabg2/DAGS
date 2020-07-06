@@ -6,8 +6,8 @@ def print_hello():
     return 'Hello world!'
 
 dag = DAG('hello_world', description='Hello to  DAG',
-          schedule_interval='0 12 * * *',
-          start_date=datetime(2020, 7, 06), catchup=False)
+          schedule_interval='* * * * *',
+          start_date=datetime(2020, 7, 6), catchup=False)
 
 kubernetes_pod_operator = KubernetesPodOperator(task_id='dummy_task', retries=3, dag=dag)
 
