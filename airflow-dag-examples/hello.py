@@ -1,7 +1,7 @@
 from datetime import datetime
 from airflow import DAG
-from airflow.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.operators.dummy_operator import KubernetesPodOperator
+from airflow.operators.hello_operator import KubernetesPodOperator
 def print_hello():
     return 'Hello world!'
 
@@ -9,8 +9,8 @@ dag = DAG('hello_world', description='Hello to  DAG',
           schedule_interval='* * * * *',
           start_date=datetime(2020, 7, 6), catchup=False)
 
-kubernetes_pod_operator = KubernetesPodOperator(task_id='dummy_task', retries=3, dag=dag)
+dummy_operator = KubernetesPodOperator(task_id='dummy_task', retries=3, dag=dag)
 
-kubernetes_pod = KubernetesPodOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
+hello_operator = KubernetesPodOperator(task_id='hello_task', python_callable=print_hello, dag=dag)
 
-kubernetes_pod_operator >> kubernetes_pod
+dummy_operator >> hello_operator
