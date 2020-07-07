@@ -21,11 +21,11 @@ def task_fail_slack_alert(context):
         http_conn_id='airflow-slack',
         webhook_token=slack_webhook_token,
         message=slack_msg,
-        username='airflow')
+        username='admin')
     return failed_alert.execute(context=context)
 
 default_args = {
-    'owner': 'airflow',
+    'owner': 'admin',
     'start_date': airflow.utils.dates.days_ago(2),
     'retries': 0,
     'on_failure_callback': task_fail_slack_alert
