@@ -30,7 +30,7 @@ args = {
 
 
 # Create some placeholder operators
-class DummySkipOperator(DummyOperator)
+class DummySkipOperator(DummyOperator):
     """Dummy operator which always skips the task."""
 
     ui_color = '#e8b7e4'
