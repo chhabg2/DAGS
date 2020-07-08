@@ -30,7 +30,7 @@ def coin_flip():
 
 # Default DAG arguments. Note the "onl_failure_callback"
 default_args = {
-    "owner": "airflow",
+    "owner": "admin",
     "depends_on_past": False,
     "start_date": datetime(2020, 7, 8),
     "email": ["gourav.chhabra@opstree.com"],
