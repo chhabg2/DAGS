@@ -4,10 +4,10 @@ slack_msg="Hi Wssup?"
 
 slack_test =  SlackWebhookOperator(
     task_id='slack_test',
-    http_conn_id='slack_connection',
+    http_conn_id='slack',
     webhook_token='/1234/abcd',
     message=slack_msg,
-    channel='#airflow_updates',
+    channel='airflow_slack',
     username='airflow_'+os.environ['ENVIRONMENT'],
     icon_emoji=None,
     link_names=False,
