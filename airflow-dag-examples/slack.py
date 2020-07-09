@@ -23,3 +23,15 @@ def task_fail_slack_alert(context):
         message=slack_msg,
         username='airflow')
     return failed_alert.execute(context=context)
+
+default_args = {
+    'owner': 'airflow',
+    'start_date': airflow.utils.dates.days_ago(2),
+    'retries': 0,
+    'on_failure_callback': task_fail_slack_alert
+}
+dag = DAG(
+    dag_id=DAG_NAME,
+    default_args=default_args,
+    schedule_interval=schedule_interval,
+)
