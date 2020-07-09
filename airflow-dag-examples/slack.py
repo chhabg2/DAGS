@@ -18,20 +18,8 @@ def task_fail_slack_alert(context):
         )
     failed_alert = SlackWebhookOperator(
         task_id='slack_test',
-        http_conn_id='airflow-slack',
+        http_conn_id='slack',
         webhook_token=slack_webhook_token,
         message=slack_msg,
-        username='admin')
+        username='airflow')
     return failed_alert.execute(context=context)
-
-default_args = {
-    'owner': 'admin',
-    'start_date': airflow.utils.dates.days_ago(2),
-    'retries': 0,
-    'on_failure_callback': task_fail_slack_alert
-}
-dag = DAG(
-    dag_id=DAG_NAME,
-    default_args=default_args,
-    schedule_interval=schedule_interval,
-)
